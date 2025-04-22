@@ -30,6 +30,10 @@ public class EmpruntService {
                 .orElseThrow(() -> new RuntimeException("Étudiant non trouvé"));
         emprunt.setEtudiant(etudiant);
 
+        if (etudiant.getStatut() == Etudiant.StatutEtudiant.BLOQUE) {
+            throw new RuntimeException("L'étudiant est bloqué et ne peut pas emprunter de livre");
+        }
+
         if (!verifierDisponibilite(emprunt.getLivre())) {
             throw new RuntimeException("Le livre n'est pas disponible");
         }
@@ -52,7 +56,7 @@ public class EmpruntService {
             throw new RuntimeException("Déjà prolongé une fois");
         }
 
-        emprunt.setDateRetourPrevu(emprunt.getDateRetourPrevu().plusDays(10));
+        emprunt.setDateRetourPrevu(emprunt.getDateRetourPrevu().plusDays(5));
         emprunt.setProlonge(true);
         return empruntRepository.save(emprunt);
     }
@@ -64,10 +68,8 @@ public class EmpruntService {
         Etudiant etudiant = emprunt.getEtudiant();
         etudiant.setNbrAvertissement(etudiant.getNbrAvertissement() + 1);
 
-        if (etudiant.getNbrAvertissement() >= 3) {
+        if (etudiant.getNbrAvertissement() >= 5) {
             etudiant.setStatut(Etudiant.StatutEtudiant.BLOQUE);
-        } else if (etudiant.getNbrAvertissement() >= 1) {
-            etudiant.setStatut(Etudiant.StatutEtudiant.ATTENTION);
         }
 
         return etudiantRepository.save(etudiant);

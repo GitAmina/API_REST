@@ -37,7 +37,6 @@ public class Etudiant {
 
     public enum StatutEtudiant {
         CONFORME,
-        ATTENTION,
         BLOQUE
     }
 
