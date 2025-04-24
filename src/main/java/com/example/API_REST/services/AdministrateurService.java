@@ -56,6 +56,12 @@ public class AdministrateurService {
     }
 
     public boolean supprimerAdministrateur(Long id) {
+        long nombreAdmins = administrateurRepository.count();
+
+        if (nombreAdmins <= 1) {
+            return false;
+        }
+
         if (administrateurRepository.existsById(id)) {
             administrateurRepository.deleteById(id);
             return true;
