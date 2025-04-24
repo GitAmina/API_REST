@@ -35,7 +35,6 @@ public class EmpruntControlleur {
         Long livreId = request.get("livreId");
         Long etudiantId = request.get("etudiantId");
 
-        // Récupération des entités complètes
         Livre livre = livreRepository.findById(livreId)
                 .orElseThrow(() -> new RuntimeException("Livre non trouvé"));
         Etudiant etudiant = etudiantRepository.findById(etudiantId)

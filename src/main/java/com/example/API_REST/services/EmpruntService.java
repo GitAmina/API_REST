@@ -127,10 +127,6 @@ public class EmpruntService {
         });
     }
 
-    /*public List<Emprunt> listerEmpruntsEnCours() {
-        return empruntRepository.findByDateRetourIsNull();
-    }*/
-
     public List<Emprunt> listerEmpruntsEnCours(String email) {
         Etudiant etudiant = etudiantRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Étudiant non trouvé"));

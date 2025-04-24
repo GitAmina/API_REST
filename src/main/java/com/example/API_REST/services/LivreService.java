@@ -1,11 +1,9 @@
 package com.example.API_REST.services;
 
-import com.example.API_REST.entites.Etudiant;
 import com.example.API_REST.entites.Livre;
 import com.example.API_REST.repository.LivreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -77,14 +75,6 @@ public class LivreService {
 
     public List<Livre> livresIndisponibles() {
         return livreRepository.findByDisponibiliteFalse();
-    }
-
-    public void mettreAJourDisponibiliteLivre(Long idL, boolean disponibilite) {
-        Optional<Livre> livreOptional = livreRepository.findById(idL);
-        livreOptional.ifPresent(livre -> {
-            livre.setDisponibilite(disponibilite);
-            livreRepository.save(livre);
-        });
     }
 
     public List<Livre> rechercherParAuteur(String auteur) {

@@ -71,19 +71,6 @@ public class AdministrateurService {
         return administrateurRepository.findByEmail(email);
     }
 
-    public List<Administrateur> rechercherParNom(String nom) {
-        return administrateurRepository.findByNomContainingIgnoreCase(nom);
-    }
-
-    public List<Livre> listerLivresParAdministrateur(Long idAd) {
-        Optional<Administrateur> administrateur = administrateurRepository.findById(idAd);
-        return administrateur.map(Administrateur::getLivres).orElse(null);
-    }
-
-    public boolean verifierExistenceAdministrateur(String email) {
-        return administrateurRepository.findByEmail(email).isPresent();
-    }
-
     public List<Administrateur> rechercherParPrenom(String prenom) {
         return administrateurRepository.findByPrenomContainingIgnoreCase(prenom);
     }
